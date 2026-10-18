@@ -2,6 +2,8 @@
 
 **Live dashboard:** https://brfss-diabetes.streamlit.app/
 
+**Notebook (cleaning and analysis):** https://nbviewer.org/github/suleimanmuazu532-ctrl/brfss-health-project/blob/main/01_cleaning.ipynb
+
 ## The question
 Is diabetes more common among people with lower incomes, and is that just because of age?
 
