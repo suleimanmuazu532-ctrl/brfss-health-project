@@ -69,3 +69,26 @@ Run these from the top folder of the project.
 The raw data comes from the CDC BRFSS 2025 survey (search "CDC BRFSS annual survey data"). It is too large to store here.
 - **"Diabetes" here means "Yes" only.** Pre-diabetes and pregnancy-only diabetes were counted as "No."
 - **Missing data:** BMI is missing for 9.1% of people, and smoking for 5.7%.
+
+
+## Project 2: Predicting diabetes (baseline vs gradient boosting)
+
+**Question:** Can age, BMI, income and exercise predict who has diabetes, and does gradient boosting beat a simple baseline?
+
+**Notebook:** [View 02_model.ipynb](https://nbviewer.org/github/suleimanmuazu532-ctrl/brfss-health-project/blob/main/02_model.ipynb)
+
+**Method:** 268,563 people with complete answers, split 80/20 into training and test sets (random seed 42, same split for both models). Compared logistic regression with gradient boosting (scikit-learn).
+
+**Results (test set, 53,713 people):**
+
+| Model | AUC |
+|---|---|
+| Logistic regression | 0.752 |
+| Gradient boosting | 0.762 |
+
+- Accuracy was misleading. Always guessing "no diabetes" is right 85.3% of the time, and both models matched or fell below it at the default 0.5 cutoff.
+- I judged the models on AUC, precision and recall at several cutoffs. At a 0.2 cutoff, gradient boosting catches 61% of diabetes cases, and about 30% of the people it flags have diabetes (the overall rate is 14.7%).
+- Age was the strongest predictor, then BMI, income and exercise.
+
+**Limitations:** This shows prediction, not cause. I chose the cutoff by looking at test-set results, so a separate validation split would be stricter. Age and income were turned into numbers (band midpoints and income order). The data is self-reported and not weighted to the US population. Only four clues were used.
+
